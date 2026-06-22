@@ -155,7 +155,7 @@ video{
 <script>
 
 const video = document.getElementById('video');
-const videoSrc = "http://152.230.229.66:8001/play/a00f/index.m3u8";
+const videoSrc = "http://hnsefpop.top:8080/5751769362026/b817f4952e83/58791";
 
 if (Hls.isSupported()) {
     const hls = new Hls();
@@ -166,22 +166,5 @@ if (Hls.isSupported()) {
 }
 
 </script>
-
-    <video id="video" controls autoplay></video>
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script>
-const video = document.getElementById('video');
-const url = 'https://152.230.229.66:8001/play/a00f/index.m3u8';
-
-if (Hls.isSupported()) {
-    const hls = new Hls();
-    hls.loadSource(url);
-    hls.attachMedia(video);
-} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = url;
-}
-</script>
-
 </body>
 </html>
