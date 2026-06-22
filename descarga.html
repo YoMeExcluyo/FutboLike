@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FutboLike - Partidos Online Gratis</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#000;
+    color:white;
+    font-family:Arial, sans-serif;
+    text-align:center;
+}
+
+header{
+    padding:30px 20px;
+}
+
+.logo{
+    max-width:350px;
+    width:90%;
+}
+
+h1{
+    color:#9CFF00;
+    margin-top:20px;
+    font-size:40px;
+}
+
+.descripcion{
+    max-width:800px;
+    margin:20px auto;
+    font-size:18px;
+    line-height:1.6;
+    color:#ddd;
+}
+
+.boton{
+    display:inline-block;
+    background:#9CFF00;
+    color:black;
+    text-decoration:none;
+    font-weight:bold;
+    padding:15px 30px;
+    border-radius:10px;
+    margin:10px;
+    transition:0.3s;
+}
+
+.boton:hover{
+    transform:scale(1.05);
+}
+
+.redes{
+    margin-top:20px;
+}
+
+.capturas{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    padding:40px 20px;
+}
+
+.imagen-demo{
+    width:300px;
+    height:550px;
+    background:#111;
+    border:3px solid #9CFF00;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+    color:#9CFF00;
+    font-weight:bold;
+}
+
+footer{
+    padding:30px;
+    color:#aaa;
+}
+
+@media(max-width:768px){
+    h1{
+        font-size:32px;
+    }
+
+    .imagen-demo{
+        width:260px;
+        height:500px;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+
+<img src="logo.png" class="logo">
+
+<h1>FutboLike</h1>
+
+<p class="descripcion">
+Disfruta partidos online autorizados y totalmente gratis desde tu teléfono Android.
+Mantente informado y vive la pasión del fútbol con FutboLike.
+</p>
+
+<a class="boton" href="http://descargaapp.futbolike">
+📥 Descargar App Android
+</a>
+
+<div class="redes">
+
+<a class="boton" href="https://facebook.com/FutboLike" target="_blank">
+Facebook
+</a>
+
+<a class="boton" href="https://instagram.com/Futbolike" target="_blank">
+Instagram
+</a>
+
+<button class="boton" onclick="compartirPagina()">
+Compartir
+</button>
+
+</div>
+
+</header>
+
+<section class="capturas">
+
+<div>
+<h2>Pantalla Principal</h2>
+<br>
+<div class="imagen-demo">
+PRONTO
+</div>
+</div>
+
+<div>
+<h2>Reproductor del Partido</h2>
+<br>
+<div class="imagen-demo">
+PRONTO
+</div>
+</div>
+
+</section>
+
+<footer>
+© 2026 FutboLike - Todos los derechos reservados.
+</footer>
+
+<script>
+
+function compartirPagina(){
+
+if(navigator.share){
+
+navigator.share({
+title:"FutboLike",
+text:"Descarga FutboLike y disfruta partidos online gratis.",
+url:window.location.href
+});
+
+}else{
+
+navigator.clipboard.writeText(window.location.href);
+alert("Enlace copiado para compartir.");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
