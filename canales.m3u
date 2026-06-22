@@ -1,0 +1,23 @@
+﻿#EXTM3U
+#EXTINF:-1 ,TyC
+http://152.230.229.66:8001/play/a04h/index.m3u8
+#EXTINF:-1 ,Win
+http://152.230.229.66:8001/play/a04q/index.m3u8
+#EXTINF:-1 ,ESPN
+http://152.230.229.66:8001/play/a01k/index.m3u8
+#EXTINF:-1 ,ESPN 2
+http://152.230.229.66:8001/play/a00o/index.m3u8
+#EXTINF:-1 ,ESPN 3
+http://152.230.229.66:8001/play/a036/index.m3u8
+#EXTINF:-1 ,ESPN 5
+http://152.230.229.66:8001/play/a01i/index.m3u8
+#EXTINF:-1 ,ESPN 6
+http://152.230.229.66:8001/play/a024/index.m3u8
+#EXTINF:-1 ,ESPN 7
+http://152.230.229.66:8001/play/a023/index.m3u8
+#EXTINF:-1 ,ESPN Premium
+http://152.230.229.66:8001/play/a00g/index.m3u8
+#EXTINF:-1 ,TNT Sports
+http://152.230.229.66:8001/play/a01n/index.m3u8
+#EXTINF:-1 ,TNT Sports Premium
+http://152.230.229.66:8001/play/a00f/index.m3u8
