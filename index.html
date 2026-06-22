@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TV Online</title>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<style>
+body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif;text-align:center}
+header{background:#111;padding:15px;font-size:24px;font-weight:bold}
+#player{width:100%;max-width:1000px;margin:20px auto}
+.container{padding:20px}
+input{width:80%;max-width:700px;padding:10px}
+button{padding:10px 20px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>TV Online</header>
+<div class="container">
+<input type="text" id="streamUrl" placeholder="Pega aquí la URL .m3u8">
+<button onclick="cargarCanal()">Ver Canal</button>
+<br><br>
+<video id="player" controls autoplay></video>
+</div>
+<script>
+function cargarCanal(){
+ const video=document.getElementById('player');
+ const url=document.getElementById('streamUrl').value;
+ if(Hls.isSupported()){
+   const hls=new Hls();
+   hls.loadSource(url);
+   hls.attachMedia(video);
+ } else {
+   video.src=url;
+ }
+}
+</script>
+</body>
+</html>
