@@ -4,36 +4,168 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TV Online</title>
+
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 <style>
-body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif;text-align:center}
-header{background:#111;padding:15px;font-size:24px;font-weight:bold}
-#player{width:100%;max-width:1000px;margin:20px auto}
-.container{padding:20px}
-input{width:80%;max-width:700px;padding:10px}
-button{padding:10px 20px;cursor:pointer}
+
+body{
+    margin:0;
+    background:#111;
+    color:white;
+    font-family:Arial, sans-serif;
+    text-align:center;
+}
+
+h1{
+    margin-top:20px;
+}
+
+.player-container{
+    position:relative;
+    width:90%;
+    max-width:1000px;
+    margin:30px auto;
+}
+
+video{
+    width:100%;
+    border-radius:12px;
+    display:block;
+}
+
+/* Logo superior derecho */
+.logo{
+    position:absolute;
+    top:15px;
+    right:15px;
+    width:110px;
+    z-index:10;
+}
+
+/* Mensaje inferior */
+.ticker{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,0.7);
+    color:white;
+    overflow:hidden;
+    padding:8px 0;
+}
+
+.ticker span{
+    display:inline-block;
+    white-space:nowrap;
+    animation:scroll 20s linear infinite;
+}
+
+@keyframes scroll{
+    from{
+        transform:translateX(100%);
+    }
+    to{
+        transform:translateX(-100%);
+    }
+}
+
+/* Contenedor botones */
+.social-buttons{
+    margin-bottom:40px;
+}
+
+/* Facebook */
+.facebook-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(135deg,#1877F2,#0d5bd7);
+    color:white;
+    text-decoration:none;
+    padding:14px 24px;
+    border-radius:50px;
+    font-weight:bold;
+    margin:10px;
+    transition:0.3s;
+}
+
+.facebook-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* Instagram */
+.instagram-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF,#515BD4);
+    color:white;
+    text-decoration:none;
+    padding:14px 24px;
+    border-radius:50px;
+    font-weight:bold;
+    margin:10px;
+    transition:0.3s;
+}
+
+.instagram-btn:hover{
+    transform:translateY(-3px);
+}
+
 </style>
 </head>
 <body>
-<header>TV Online</header>
-<div class="container">
-<input type="text" id="streamUrl" placeholder="http://152.230.229.66:8001/play/a00f/index.m3u8">
-<button onclick="cargarCanal()">Ver Canal</button>
-<br><br>
-<video id="player" controls autoplay></video>
+
+<h1>TV Online</h1>
+
+<div class="player-container">
+
+    <!-- Logo -->
+    <img src="https://i.ibb.co/dyn9c9L/file-00000000414c720ea2dc5d14dbbf026f.png" class="logo">
+
+    <!-- Reproductor -->
+    <video id="video" controls autoplay></video>
+
+    <!-- Mensaje inferior -->
+    <div class="ticker">
+        <span>
+            Bienvenido a TV Online • Síguenos en nuestras redes sociales y disfruta nuestra programación.
+        </span>
+    </div>
+
 </div>
+
+<div class="social-buttons">
+
+    <a href="https://www.facebook.com/FutboLike"
+       target="_blank"
+       class="facebook-btn">
+        📘 Facebook
+    </a>
+
+    <a href="https://www.instagram.com/futbolike1"
+       target="_blank"
+       class="instagram-btn">
+        📸 Instagram
+    </a>
+
+</div>
+
 <script>
-function cargarCanal(){
- const video=document.getElementById('player');
- const url=document.getElementById('streamUrl').value;
- if(Hls.isSupported()){
-   const hls=new Hls();
-   hls.loadSource(url);
-   hls.attachMedia(video);
- } else {
-   video.src=url;
- }
+
+const video = document.getElementById('video');
+const videoSrc = "http://152.230.229.66:8001/play/a00f/index.m3u8";
+
+if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(videoSrc);
+    hls.attachMedia(video);
+} else {
+    video.src = videoSrc;
 }
+
 </script>
+
 </body>
 </html>
