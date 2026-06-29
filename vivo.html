@@ -1,16 +1,45 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TV Online</title>
- <!-- Inicio. radio hosting USAstreams.com html5 player -->
-<!-- Licencia: GRATIS-XDF4543ERF -->
-<iframe name="contenedorPlayer" class="cuadroBordeado" allow="autoplay" width="100%" height="78px" marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0 scrolling=no  src="https://cp.usastreams.com/pr2g/APPlayerRadioHTML5.aspx?stream=http://152.230.229.66:8001/play/a00f/;&fondo=05&formato=mpeg&color=14&titulo=2&autoStart=1&vol=5&tipo=14&nombre=Radio+FM+TOP40&imagen=https://cp.usastreams.com/playerHTML5/img/cover.png"></iframe>
-<!-- En players responsive puede modificar el weight a sus necesidades, Por favor no modifique el resto del codigo para poder seguir ofreciendo este servicio gratis  -->
-<!-- Fin. USAstreams.com html5 player -->
-  
-  
+<title>Reproductor IPTV</title>
+
+<script src="https://cdn.jsdelivr.net/npm/mpegts.js@latest/dist/mpegts.min.js"></script>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+}
+video{
+    width:100%;
+    height:100vh;
+    background:#000;
+}
+</style>
+</head>
+<body>
+
+<video id="video" controls autoplay></video>
+
+<script>
+const video = document.getElementById('video');
+
+if (mpegts.getFeatureList().mseLivePlayback) {
+    const player = mpegts.createPlayer({
+        type: 'mpegts',
+        isLive: true,
+        url: 'http://goldtv.lat:80/live/9C00D37FA671/D37FA6719C00/276332.ts'
+    });
+
+    player.attachMediaElement(video);
+    player.load();
+    player.play();
+} else {
+    alert("Tu navegador no es compatible.");
+}
+</script>
+
 </body>
 </html>
