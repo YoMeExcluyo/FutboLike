@@ -1,170 +1,90 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TV Online</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reproductor TV</title>
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #080808;
+        }
 
-<style>
+        .reproductor {
+            width: min(100%, 1000px);
+            background: #000;
+        }
 
-body{
-    margin:0;
-    background:#111;
-    color:white;
-    font-family:Arial, sans-serif;
-    text-align:center;
-}
+        video {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
 
-h1{
-    margin-top:20px;
-}
-
-.player-container{
-    position:relative;
-    width:90%;
-    max-width:1000px;
-    margin:30px auto;
-}
-
-video{
-    width:100%;
-    border-radius:12px;
-    display:block;
-}
-
-/* Logo superior derecho */
-.logo{
-    position:absolute;
-    top:15px;
-    right:15px;
-    width:110px;
-    z-index:10;
-}
-
-/* Mensaje inferior */
-.ticker{
-    position:absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:rgba(0,0,0,0.7);
-    color:white;
-    overflow:hidden;
-    padding:8px 0;
-}
-
-.ticker span{
-    display:inline-block;
-    white-space:nowrap;
-    animation:scroll 20s linear infinite;
-}
-
-@keyframes scroll{
-    from{
-        transform:translateX(100%);
-    }
-    to{
-        transform:translateX(-100%);
-    }
-}
-
-/* Contenedor botones */
-.social-buttons{
-    margin-bottom:40px;
-}
-
-/* Facebook */
-.facebook-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    background:linear-gradient(135deg,#1877F2,#0d5bd7);
-    color:white;
-    text-decoration:none;
-    padding:14px 24px;
-    border-radius:50px;
-    font-weight:bold;
-    margin:10px;
-    transition:0.3s;
-}
-
-.facebook-btn:hover{
-    transform:translateY(-3px);
-}
-
-/* Instagram */
-.instagram-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF,#515BD4);
-    color:white;
-    text-decoration:none;
-    padding:14px 24px;
-    border-radius:50px;
-    font-weight:bold;
-    margin:10px;
-    transition:0.3s;
-}
-
-.instagram-btn:hover{
-    transform:translateY(-3px);
-}
-
-</style>
+        #mensaje {
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>TV Online</h1>
-
-<div class="player-container">
-
-    <!-- Logo -->
-    <img src="https://i.ibb.co/dyn9c9L/file-00000000414c720ea2dc5d14dbbf026f.png" class="logo">
-
-    <!-- Reproductor -->
-    <video id="video" controls autoplay></video>
-
-    <!-- Mensaje inferior -->
-    <div class="ticker">
-        <span>
-            Bienvenido a TV Online • Síguenos en nuestras redes sociales y disfruta nuestra programación.
-        </span>
-    </div>
-
+<div class="reproductor">
+    <video id="video" controls autoplay muted playsinline></video>
+    <div id="mensaje">Cargando transmisión...</div>
 </div>
 
-<div class="social-buttons">
-
-    <a href="https://www.facebook.com/FutboLike"
-       target="_blank"
-       class="facebook-btn">
-        📘 Facebook
-    </a>
-
-    <a href="https://www.instagram.com/futbolike1"
-       target="_blank"
-       class="instagram-btn">
-        📸 Instagram
-    </a>
-
-</div>
+<script src="https://cdn.jsdelivr.net/npm/mpegts.js@latest/dist/mpegts.js"></script>
 
 <script>
+const video = document.getElementById("video");
+const mensaje = document.getElementById("mensaje");
 
-const video = document.getElementById('video');
-const videoSrc = "https://threeo-tv.cloud/live/ThreeoTV225/d8znVtex63/417206.ts";
+const streamURL =
+    "https://threeo-tv.cloud/live/ThreeoTV225/d8znVtex63/417206.ts";
 
-if (Hls.isSupported()) {
-    const hls = new Hls();
-    hls.loadSource(videoSrc);
-    hls.attachMedia(video);
+if (mpegts.getFeatureList().mseLivePlayback) {
+    const player = mpegts.createPlayer({
+        type: "mpegts",
+        isLive: true,
+        url: streamURL
+    }, {
+        enableWorker: true,
+        enableStashBuffer: false,
+        stashInitialSize: 128
+    });
+
+    player.attachMediaElement(video);
+    player.load();
+
+    player.play()
+        .then(() => {
+            mensaje.style.display = "none";
+        })
+        .catch(() => {
+            mensaje.textContent =
+                "Presiona reproducir para iniciar la transmisión.";
+        });
+
+    player.on(mpegts.Events.ERROR, function(tipo, detalle) {
+        console.error("Error:", tipo, detalle);
+        mensaje.textContent =
+            "No se pudo cargar la transmisión.";
+    });
 } else {
-    video.src = videoSrc;
+    mensaje.textContent =
+        "Este navegador no admite transmisiones MPEG-TS.";
 }
-
 </script>
+
 </body>
 </html>
