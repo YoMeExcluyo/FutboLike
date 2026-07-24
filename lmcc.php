@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FutboLike - Descargar App</title>
 <div id="bloqueo">
     <h2>Contenido exclusivo</h2>
     <p>Síguenos en Instagram para ver el video.</p>
@@ -34,3 +40,4 @@ if (localStorage.getItem("accesoContenido") === "si") {
     mostrarVideo();
 }
 </script>
+</html>
